@@ -1,0 +1,18 @@
+#workflow
+name: hello
+on:
+  push:
+
+#jobs
+jobs:
+  greet:
+    runs-on: ubuntu-latest
+
+    #steps
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v4
+
+      - name: Print greeting
+        run: echo "Hello from GitHub Actions!"
+  
