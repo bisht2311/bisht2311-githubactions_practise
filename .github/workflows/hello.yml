@@ -2,7 +2,8 @@
 name: hello
 on:
   push:
-
+    paths:
+      - **.md
 #jobs
 jobs:
   greet:
