@@ -3,7 +3,7 @@ name: hello
 on:
   push:
     paths:
-      - **.md
+      - '**/*.md'
 #jobs
 jobs:
   greet:
