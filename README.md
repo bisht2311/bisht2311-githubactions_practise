@@ -1,1 +1,1 @@
-This is a GitHub Action practise repo.
+This is a GitHub Action practise repository.
