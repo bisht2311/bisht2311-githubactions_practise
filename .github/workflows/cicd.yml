@@ -1,6 +1,16 @@
 name: CICD
 on: 
-  workflow_dispatch:
+  workflow_dispatch: 
+    inputs:
+      environment:
+        description: Environment
+        required: true
+        default: Stagging
+        type: choice
+        options:
+          - Dev
+          - Stagging
+          - Deploy
 
 jobs:
   code:
@@ -10,6 +20,7 @@ jobs:
         run: echo "Code Fetched"
   build:
     runs-on: ubuntu-latest
+    if: ${{inputs.environment == 'Dev'}}
     needs:
       - code
     steps:
@@ -17,6 +28,7 @@ jobs:
         run: echo "App built successfully."
   test:
     runs-on: ubuntu-latest
+    if: ${{inputs.environment == 'Stagging'}}
     needs:
       - build
     steps:
@@ -24,6 +36,7 @@ jobs:
         run: echo "Test Successfully"
   deploy:
     runs-on: ubuntu-latest
+    if: ${{inputs.environment == 'Deploy'}}
     needs:
       - test
     steps:
