@@ -20,7 +20,7 @@ jobs:
         run: echo "Code Fetched"
   build:
     runs-on: ubuntu-latest
-    if: ${{inputs.environment == 'Dev'}}
+    if: ${{inputs.environment == 'Dev' || inputs.environment == 'Stagging' || inputs.environment == 'Deploy'}}
     needs:
       - code
     steps:
@@ -28,7 +28,7 @@ jobs:
         run: echo "App built successfully."
   test:
     runs-on: ubuntu-latest
-    if: ${{inputs.environment == 'Stagging'}}
+    if: ${{inputs.environment == 'Stagging' || inputs.environment == 'Deploy'}}
     needs:
       - build
     steps:
