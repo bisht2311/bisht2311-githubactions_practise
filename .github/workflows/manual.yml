@@ -1,6 +1,6 @@
-name: Manaul Workflow
+name: Manual Workflow
 on:
-  workflow-dispatch:
+  workflow_dispatch:
 
 jobs:
   manual_trigger:
@@ -11,4 +11,4 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Manual Trigger
-        run: echo "The workflow ran successfull and it was triggered manually"
+        run: echo "The workflow ran successfully and it was triggered manually"
