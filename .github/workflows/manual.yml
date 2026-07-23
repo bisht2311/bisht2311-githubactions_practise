@@ -1,0 +1,14 @@
+name: Manaul Workflow
+on:
+  workflow-dispatch:
+
+jobs:
+  MANAUL TRIGGER
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Code Checkout
+        uses: actions/checkout@v4
+
+      - name: Manual Trigger
+        run: echo "The workflow ran successfull and it was triggered manually"
