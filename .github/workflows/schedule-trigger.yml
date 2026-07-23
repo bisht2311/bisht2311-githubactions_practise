@@ -1,0 +1,15 @@
+name: SCHEDULE TRIGGER
+on:
+  schedule:
+    - cron: "10 3 * * *"
+
+jobs:
+  schedule_greet:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Code Checkout
+        uses: actions/checkout@v4
+      
+      - name: Schedule Workflow Triggered
+        run: echo "The Schedule Workflow will Trigger and run every day at 8:40 AM IST"
