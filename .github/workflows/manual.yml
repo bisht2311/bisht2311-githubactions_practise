@@ -3,7 +3,7 @@ on:
   workflow-dispatch:
 
 jobs:
-  MANAUL TRIGGER
+  manual_trigger:
     runs-on: ubuntu-latest
 
     steps:
