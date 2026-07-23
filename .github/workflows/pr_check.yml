@@ -1,0 +1,16 @@
+name: PR_CHECK
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  pr_check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Its used to check PR
+        run: echo "The PR has been trigerred for branch ${{ github.head_ref }}" 
