@@ -1,7 +1,7 @@
 name: SCHEDULE TRIGGER
 on:
   schedule:
-    - cron: "10 3 * * *"
+    - cron: "15 3 * * *"
 
 jobs:
   schedule_greet:
