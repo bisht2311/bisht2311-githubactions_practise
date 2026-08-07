@@ -1,0 +1,18 @@
+name: Martix Workflow
+on: workflow_dispatch
+
+jobs:
+  python-matrix:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.10","3.11","3.12"]
+    steps:
+      - name: Installing Python(versions)
+        uses: actions/setupactions/setup-python@v5
+        with:  
+          python-version: ${{ matrix.python-version }}
+
+      - name: Python version installed
+        run: python --version
+      
