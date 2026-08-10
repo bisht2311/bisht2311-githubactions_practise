@@ -1,0 +1,13 @@
+name: Ubuntu-Preinstall
+on: workflow_dispatch
+
+jobs:
+  ubuntu-latest-preinstall-info:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Pre-install Info from ubuntu-latest runner
+        run: |
+          echo "Docker Vesrion: $(docker --version)"
+          echo "Python Vesrion: $(python --version)"
+          echo "Node Vesrion: $(node --version)"
+          echo "Git Vesrion: $(git --version)"
