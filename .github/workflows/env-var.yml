@@ -16,5 +16,5 @@ jobs:
           echo "Job Level: $ENVIRONMENT"
           echo "Step Level: $VERSION"
           echo "Commit SHA: ${{ github.sha }}"
-          echo: "Actor: ${{ github.actor }}"
+          echo "Actor: ${{ github.actor }}"
         
