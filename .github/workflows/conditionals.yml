@@ -1,29 +1,36 @@
 name: Conditional Workflow
 on:
-  push:  
+  push:
     branches: [main]
   pull_request:
     branches: [main]
-  workflow_dispatch: 
+  workflow_dispatch:
 
 jobs:
   conditional-checks:
     runs-on: ubuntu-latest
     steps:
-      - name: Check is the Pushed branch is main?
-        if: $github.ref == 'refs/heads/main'
+      # 1. Runs only when the branch is main
+      - name: Check if the branch is main
+        if: github.ref_name == 'main'
         run: |
           echo "Branch is main"
-      - name: To be run when the previous step failed?
+      # 2. Runs when a previous step failed
+      - name: Run when previous step failed
         if: failure()
-        run: echo "Previous Step failed"
+        run: echo "Previous step failed"
+  # 3. Job runs only on push events
   on-push:
-    if: $github.event_name == 'push'
+    if: github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
-      - run: echo "This job will run on the push trigger only."
-      - name: Continue if the error occur
+      - name: Push only job
+        run: echo "This job will run on push trigger only."
+      # 4. Failure is allowed
+      - name: Continue if an error occurs
         continue-on-error: true
         run: |
           echo "This step will fail"
           exit 1
+      - name: Next step
+        run: echo "This step still runs because the previous failure was allowed."
