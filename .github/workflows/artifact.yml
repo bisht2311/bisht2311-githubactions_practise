@@ -1,0 +1,38 @@
+name: Artifact Workflow
+on: workflow_dispatch
+
+jobs:
+  provide-artifact:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate Artifact1
+        run: |
+          echo "This is the artifact data" > arti1.txt
+      - name: Generate Artifact2
+        run: |
+          echo "This is the artifact data" > arti2.txt
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: arti
+          path: |
+            arti1.txt
+            arti2.txt
+
+  display-artifact-data:
+    needs: 
+      - provide-artifact
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: arti
+      - name: Print artifact data
+        run: |
+          echo "=====1st Artifact Data===="
+          cat arti1.txt
+          echo "=====2nd Artifact Data"
+          cat arti2.txt
+
+            
