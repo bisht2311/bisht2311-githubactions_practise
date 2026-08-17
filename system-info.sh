@@ -1,3 +1,5 @@
+set -e
+
 echo "============Today's Date==========="
 date
 echo "==========Sysytem uptime=========="
