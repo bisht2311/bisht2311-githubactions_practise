@@ -1,0 +1,23 @@
+name: Python lint
+on: workflow_dispatch
+
+jobs:
+  System--Info:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.14"
+
+      - name: Installing dependencies
+        run: pip install -r requirements.txt
+
+      - name: Make the script executable
+        run: chmod +x system-info.sh
+
+      - name: Running script 
+        run: ./system-info.sh
