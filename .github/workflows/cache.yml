@@ -1,0 +1,57 @@
+name: Cache Workflow
+on: workflow_dispatch
+
+jobs:
+  Build-Cache:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v6
+
+      - name: Setup Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+
+      - name: Pip Cache
+        id: pip-cache
+        uses: actions/cache@v5
+        with:
+          path: ~/.cache/pip
+          key: pip-cache-${{ runner.os }}-${{ hashFiles('requirements.txt') }}
+          restore-keys: pip-cache-
+
+      - name: Display Cache Status
+        run: |
+          echo "Cache Hit: ${{ steps.pip-cache.outputs.cache-hit }}"
+
+      - name: Installing dependencies
+        run: pip install -r requirements.txt
+
+  Test-Cache-Job:
+    needs:
+      - Build-Cache
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v6
+
+      - name: Setup Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+
+      - name: Pip Cache
+        id: pip-cache
+        uses: actions/cache@v5
+        with:
+          path: ~/.cache/pip
+          key: pip-cache-${{ runner.os }}-${{ hashFiles('requirements.txt') }}
+          restore-keys: pip-cache-
+
+      - name: Display Cache Status
+        run: |
+          echo "Cache Hit: ${{ steps.pip-cache.outputs.cache-hit }}"
+
+      - name: Installing dependencies
+        run: pip install -r requirements.txt
