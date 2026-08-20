@@ -1,0 +1,42 @@
+name: Docker Publish
+on:
+  push:
+  pull_request:
+    types: 
+      - opened
+      - synchronize
+
+jobs:
+  Docker-Publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v5
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v4
+        with:
+          username: ${{ vars.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Slicing Commit SHA
+        id: short_sha
+        run: echo "short7sha=${GITHUB_SHA::7}" >> $GITHUB_OUTPUT
+
+      - name: Build and push Docker images for main branch
+        if: github.ref_name == 'main'
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: |
+            ${{  github.repository }}-webapp:latest
+            ${{ github.repository }}-webapp:sha-${{ steps.short_sha.outputs.short7sha }}
+
+      - name: Build image if pushed from other branches or PRs but not push them
+        if: github.ref_name != 'main'
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: false
+            
