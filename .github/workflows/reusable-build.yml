@@ -28,7 +28,7 @@ jobs:
           echo "Building ${{inputs.app-name}} for ${{inputs.environment}}"
       - name: Verify Docker Token 
         run: |
-          if [ -n "${{ secrets.docker_token }}" ]; then
+          if [ -n "${{ secrets.docker-token }}" ]; then
             echo "Docker token is set: true"
           else
             echo "Docker token is set: false"
