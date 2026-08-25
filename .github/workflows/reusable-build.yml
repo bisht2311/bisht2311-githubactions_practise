@@ -26,6 +26,13 @@ jobs:
       - name: Printing inputs data
         run: |
           echo "Building ${{inputs.app-name}} for ${{inputs.environment}}"
+      - name: Verify Docker Token 
+        run: |
+          if [ -n "${{ secrets.docker_token }}" ]; then
+            echo "Docker token is set: true"
+          else
+            echo "Docker token is set: false"
+          fi
       - name: Generating Output
         id: gen_out
         run: |
