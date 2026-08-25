@@ -1,0 +1,19 @@
+name: Calling Build Reusable Workflow
+on: workflow_dispatch
+
+jobs:
+  calling_build:
+    uses: ./.github/workflows/reusable-build.yml
+    with:
+      app-name: "web-app"
+      environment: "test"
+    secrets:
+      docker-token: ${{ secrets.DOCKERHUB_TOKEN }}
+
+  printing_version:
+    needs: calling_build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Printing Version
+        run: |
+          echo "Version is: ${{ needs.calling_build.outputs.build-version }}"
