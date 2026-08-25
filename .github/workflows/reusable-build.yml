@@ -1,0 +1,37 @@
+name: Reusable-Build Workflow
+on: 
+  workflow_call:
+    inputs:
+      app-name:
+        description: "App Name"
+        required: true
+        type: string
+      environment:
+        description: "Environment"
+        required: true
+        type: string
+    secrets:
+      docker-token: 
+        required: true
+    outputs:
+      build-version:
+        value: ${{jobs.build.outputs.job_ver}}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v6
+      - name: Printing inputs data
+        run: |
+          echo "Building ${{inputs.app-name}} for ${{inputs.environment}}"
+      - name: Generating Output
+        id: gen_out
+        run: |
+          build_version="v1.0.${GITHUB_SHA::7}"
+          echo "version=$build_version" >> $GITHUB_OUTPUT
+          echo "Build Version is $build_version"
+    outputs:
+      job_ver: ${{steps.gen_out.outputs.version}}
+  
