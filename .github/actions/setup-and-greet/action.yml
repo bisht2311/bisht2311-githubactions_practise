@@ -1,0 +1,37 @@
+name: Setup and Greet
+description: Greet a user in different languages
+
+inputs:
+  name:
+    required: true
+  language:
+    required: true
+
+outputs:
+  greet:
+    value: ${{ steps.result.outputs.flag }}
+
+runs:
+  using: composite
+  steps:
+    - name: Greet
+      shell: bash
+      run: |
+        if [["${{inputs.language}}" == "en"]]; then
+          echo "Hello ${{inputs.name}}"
+        elif [["${{inputs.language}}" == "es" ]] ; then
+          echo "Hola ${{inputs.name}}"
+        else
+          echo "Hey!"
+        fi
+    - name: Print date and runner os
+      shell: bash
+      run: |
+        echo "$(date)"
+        echo "$RUNNER_OS"
+    - name: Set Output
+      id: result
+      shell: bash
+      run: |
+        echo "flag=true" >> $GITHUB_OUTPUT
+      
