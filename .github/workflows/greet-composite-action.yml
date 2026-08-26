@@ -1,0 +1,17 @@
+name: Greet(Composite Action)
+on: workflow_dispatch
+
+jobs:
+  greet:
+    runs-on: ubuntu-latest
+    steps: 
+      - name: Greeting Composite Action
+        id: get
+        uses: ./.github/actions/setup-and-greet
+        with:
+          name: Harshit
+          language: en
+      - name: Verify
+        run: |
+          echo "Result: ${{steps.get.outputs.greet}}"
+    
