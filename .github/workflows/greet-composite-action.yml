@@ -5,6 +5,8 @@ jobs:
   greet:
     runs-on: ubuntu-latest
     steps: 
+      - name: Checkout Repository
+        uses: actions/checkout@v6
       - name: Greeting Composite Action
         id: get
         uses: ./.github/actions/setup-and-greet
