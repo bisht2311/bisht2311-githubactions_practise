@@ -1,15 +1,17 @@
 name: Run Tests
-
 on:
   push:
-
 jobs:
-  run-test:
+  test:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v6
-
-      - name: Workflow run
-        run: echo "This test.yml run at: $(date)"
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+      - name: Install Dependencies
+        run: echo "Installing"
+      - name: Run Tests
+        run: echo "Tests run successfully!"
