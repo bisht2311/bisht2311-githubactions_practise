@@ -6,5 +6,3 @@ The PR types:
 - reopened
 - merged
 - synchronize
-
-Updated Again
