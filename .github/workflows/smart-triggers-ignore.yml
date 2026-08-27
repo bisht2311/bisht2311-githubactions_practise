@@ -1,0 +1,17 @@
+name: Smart Triggers Ignore
+on:
+  push:
+    branches:
+      - main
+      - 'release/**'
+    paths-ignore:
+      - '*.md'
+      - 'docs/**'
+jobs:
+  build-path-ignore:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Run workflow task
+        run: echo "Workflow ran because change was not on only docs or .md"
