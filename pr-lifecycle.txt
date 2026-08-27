@@ -1,0 +1,7 @@
+This is a PR lifecycle text file in feature/pr-lifecycle branch.
+
+The PR types:
+- opened
+- closed
+- reopened
+- merged
